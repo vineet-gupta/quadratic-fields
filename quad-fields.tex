@@ -1,0 +1,243 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts,amsmath,amsthm,amssymb}
+\usepackage[capitalise,nameinlink]{cleveref}
+\usepackage{pict2e,curve2e}
+\newcommand{\real}{{\mathbb{R}}}
+\newcommand{\complex}{{\mathbb{C}}}
+\newcommand{\nat}{{\mathbb{N}}}
+\newcommand{\ints}{{\mathbb{Z}}}
+\newcommand{\qf}{{\mathbb{Q}}}
+\marginparwidth 0pt \oddsidemargin 0pt \evensidemargin 0pt
+\marginparsep0pt \topmargin 0pt \textwidth 6.5in \textheight 8.5in
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{theorem}[thm]{Theorem}
+\newtheorem{lemma}[thm]{Lemma}
+
+\begin{document}
+
+\section{Quadratic Fields}
+
+A {\em quadratic field} is defined as $\qf(\sqrt{-d}) = \{a + b\sqrt{-d}\ \mid\ a, b \in \qf\}$ where $d \in \ints$. It can be verified to be a field over $\qf$ with the usual operations of $+, \times$, with respective identities $0, 1$ and inverses $- a - b\sqrt{-d}$ and $\frac{a}{a^2 + b^2 d} - \frac{b}{a^2 + b^2 d}\sqrt{-d}$.
+
+An {\em integer} in a field is defined to be any element of the field which is the root of a {\em monic} polynomial with coefficients in $\ints$.  
+The set of integers in a quadratic field form a ring.  We will denote the ring of integers in $\qf(\sqrt{-d})$ by $\ints(\sqrt{-d})$. 
+\begin{lemma}
+\begin{enumerate}
+\item If $d = 0$, i.e. $\qf(\sqrt{-d}) = \qf$, then $\ints(\sqrt{-d}) = \ints$.
+\item If $d \equiv 1, 2 \mod 4$, then $\ints(\sqrt{-d}) = \{a + b\sqrt{-d}\ \mid\ a, b \in \ints\}$.
+\item If $d \equiv 3 \mod 4$, then $\ints(\sqrt{-d}) = \{a + b\frac{1 + \sqrt{-d}}{2}\ \mid\  a, b \in \ints\}$.
+\end{enumerate}
+Note that if $d \equiv 0 \mod 4$, then $\qf(\sqrt{-d}) = \qf(\sqrt{-d/4})$, so this case is covered by the above cases.
+\end{lemma}
+\begin{proof}
+The elements of the given sets are integers in their respective fields:
+\begin{enumerate}
+\item Every $z \in \ints$ is the root of the monic polynomial $x - z$.
+\item If $d \equiv 1, 2 \mod 4$, then $a + b\sqrt{-d}$ is a root of the monic polynomial $x^2 - 2ax + a^2 + db^2$.
+\item If $d \equiv 3 \mod 4$, then $a + b\frac{1 + \sqrt{-d}}{2}$ is a root of the monic polynomial $x^2 - (2a + b)x + a^2 + ab + \frac{d+1}{4}b^2$, and $\frac{d+1}{4} \in \ints$ as $4 \mid (d + 1)$.
+\end{enumerate}
+Conversely these are the only integers because if $x$ is a root of a monic polynomial $P(x)$ with integer coefficients, then:
+\begin{itemize}
+\item Irrational or complex roots of rational polynomials occur in conjugate pairs so $x$ must be the root of a linear or quadratic factor of $P(x)$, where the coefficients of the factors are in $\qf$.
+\item The factors of an integer polynomial can be made to be monic with integer coefficients. This is Gauss' Lemma. Proof: Let $P(x) = Q(x) R(x)$, where $Q(x), R(x)$ are monic (we can assure this by dividing by the leading coefficients of $Q(x)$ and $R(x)$). Then there exist smallest positive integers $m, n$ such that $m Q(x)$ and $n R(x)$ are integer polynomials, say $Q'(x) = mQ(x)$ and $R'(x) = nR(x)$. Thus $mn P(x) = Q'(x) R'(x)$. Now if $p | mn$, and $p$ is a prime, then $p$ divides all the coefficients of $mnP(x)$. Now suppose $q_i, r_j$ are the first coefficients of $Q'(x), R'(x)$  such that $p \nmid q_i, p \nmid r_j$. Then $p$ does not divide the coefficient of $x^{i+j}$ in the product, which is a contradiction. Hence $p$ must divide all the coefficients of $Q'(x)$ or all the coefficients of $R'(x)$. But this means that either $m$ or $n$ was not the smallest possible integers, as assumed. Hence $Q(x)$ and $R(x)$ must be integer polynomials.
+\item If a factor is linear monic with coefficients in $\ints$, then its root is in $\ints$, which is in the sets above for any $d$. Otherwise let the factor be $x^2 - ax + b$, $a, b \in \ints$. Its root is $x = \frac{a + \sqrt{a^2 - 4b}}{2}$ (the other root is analogous).  In this case:
+\begin{enumerate}
+\item If $d = 0$, then for $x$ to be in $\qf$,  $a^2 - 4b$ must be a square.  If $a$ is even, then the square root is even, so $x \in \ints$. If $a$ is odd, then the square root is also odd, so $a + \sqrt{a^2 - 4b}$ is even, and again $x \in \ints$.
+\item If $d \equiv 1, 2 \mod 4$, and $a^2 - 4b$ is not a square, then $x \in \qf(\sqrt{-d})$ iff $a^2 - 4b = -m^2d$ for some $m \in \ints$.  If $a$ is even, then $m$ is even, and $x = \frac{a}{2} + \frac{m}{2}\sqrt{-d}$, which is in $\ints(\sqrt{-d})$. If $a$ is odd and $a^2 = 4b - m^2d$, then $a^2 \equiv 1 \mod 4$, whereas $4b - m^2d \equiv 0, 2, 3 \mod 4$, which is not possible.
+\item If $d \equiv 3 \mod 4$, then as before $a^2 - 4b = -m^2d$. In this case if $a$ is odd, we get $x = \frac{a}{2} + \frac{m}{2}\sqrt{-d}$, where $a, m$ are both odd.  Then $x = \frac{a-m}{2} + m\frac{1 + \sqrt{-d}}{2}$, which is in $\ints(\sqrt{-d})$.
+\end{enumerate}
+\end{itemize}
+\end{proof}
+
+For any elements $a, b$ in a ring $R$, define $a | b$ if there exists $c \in R$ such that $ac = b$. 
+A {\em unit} $u \in R$ is any element such that $u | 1$. For example in the ring $\ints$, the only units are $\pm 1$, whereas in the ring $\ints(i)$ the units are $\pm 1, \pm i$.  Note that the set of units in a ring form a subgroup of the ring. Two elements $a, b \in R$ are said to be associates if $a = ub$ where $u$ is a unit in $R$. A {\em prime} $p \in R$ is any element which is not a unit such that $a | p$ iff $a$ is a unit or an associate of $p$.
+
+A ring $R$ is a unique factorization domain if every integer can be written as a product of primes in a unique way, up to reorderings, units and associates.
+
+\section{Case $d = 0$ --- Unique Factorization in $\ints$}
+
+\begin{lemma}\label{lem:div-ints}
+Given any $a, b \in \ints$, $b \neq 0$, there exists $q, r \in \ints$ such that $a = bq + r$, and $|r| < |b|$.
+\end{lemma}
+\begin{proof}
+Consider $\frac{a}{b}$. This is an element of $\qf$, and hence lies between two consecutive elements of $\ints$. Thus there is some $q \in \ints$ such that $| \frac{a}{b} - q| < 1$. Multiplying by $|b|$, we have $|b|  |\frac{a}{b} - q|  = |a - bq| < |b|$. Set $r = a - bq$, then $q, r$ have the required property.
+\end{proof}
+
+The gcd of $a, b \in \ints - \{0\}$ is any element $d \in \ints, d | a, d | b$ such that for any other element $d' \in \ints, d'|a, d' | b \Rightarrow d' | d$.
+
+\begin{lemma}\label{lem:euclid-ints}
+If $d$ is a gcd of $a, b \in  \ints$ then $d = ax + by$ for some $x, y \in \ints$.
+\end{lemma}
+\begin{proof}
+The proof follows by Euclid's algorithm and \cref{lem:div-ints}.
+\end{proof}
+
+\begin{lemma}\label{lem:prime-ints}
+If $p \in \ints$ is a prime, then $p | ab$ implies $p | a$ or $p | b$.
+\end{lemma}
+\begin{proof}
+Suppose $p | ab$, and w.l.o.g. assume $p \nmid a$. Then 1 is a gcd of $a, p$, because if $d | a, d | p$, then $d$ is a unit or an associate of $p$, but it cannot be an associate as $p \nmid a$ - so it is a unit i.e. $d | 1$. 
+By \cref{lem:euclid-ints}, $1 = ax + py$.  Thus $b = abx + pby$. Since $p | abx, p | pby$, we have $p | b$.
+\end{proof}
+
+\begin{theorem}
+$\ints$ is a unique factorization domain.
+\end{theorem}
+\begin{proof}
+Every element of $\ints$ is either prime, or the product of two numbers which are themselves products of primes. Hence inductively, every number can be written as a product of primes. If $n = p_1 p_2 \ldots p_m = q_1 q_2\ldots q_m'$, where the $p_i, q_j$'s are primes, then $p_1 | q_1 q_2\ldots q_m'$, so by \cref{lem:prime-ints} $p_1 | q_j$ for some $j \in 1\ldots m'$. Thus $p_1$ is an associate of $q_j$. Cancelling these out on both sides and repeating shows us that the prime factorization is unique.
+\end{proof}
+
+\section{Case $d = 1, 2$ --- Unique Factorization in $\ints(i), \ints(\sqrt{-2})$}
+We only need to establish the analog of \cref{lem:div-ints} for $\ints(i)$ and $\ints(\sqrt{-2})$ - the rest of the proof follows the case $d = 0$. Define the norm on $\qf(\sqrt{-d})$ as a function $N: \qf(\sqrt{-d}) \to \qf$ defined by $N(a + b\sqrt{-d}) = a^2 + db^2$. This has the following properties:
+\begin{itemize}
+\item $N(z) \geq 0$ and $N(z) = 0 \leftrightarrow z = 0$.
+\item $N(z) = 1$ iff $z$ is a unit.
+\item $N(ab) = N(a)N(b)$.
+\end{itemize}
+
+\begin{lemma}
+For $d = 1, 2$, given any $a, b \in \ints(\sqrt{-d})$, $b \neq 0$, there exists $q, r \in \ints(\sqrt{-d}))$ such that $a = bq + r$, and $N(r) < N(b)$.
+\end{lemma}
+\begin{proof}
+The proof is analogous to the proof of \cref{lem:div-ints}. Consider $\gamma = \frac{a}{b}$. Then since $\qf(\sqrt{-d})$ is a field, $\gamma \in \qf(\sqrt{-d})$. Let $\gamma = x + y\sqrt{-d}$, where $x, y \in \qf$. 
+Thus there exist $m, n \in \ints$ such that $|x - m| \leq \frac{1}{2}$ and $|y - n| \leq \frac{1}{2}$. Let $q = m + n\sqrt{-d}$.  Thus
+$$
+N(\gamma - q) = N((x - m) + (y - n)\sqrt{-d}) = (x - m)^2 + d(y - n)^2 \leq \frac{1 + d}{4} < 1
+$$
+Thus $N(a - bq) = N(b(\gamma - q)) = N(b) N(\gamma - q) < N(b)$. Set $r = a - bq$ to get $q, r$ that satisfy the properties required in the lemma.
+\end{proof}
+
+\section{Case $d = 3, 7, 11$ --- Unique Factorization in $\ints(\sqrt{-3})$, $\ints(\sqrt{-7})$, $\ints(\sqrt{-11})$}
+
+Note that the above proof does not work since we showed that $N(\gamma - q) \leq \frac{1 + d}{4}$, but this is less than 1 for $d \leq 2$.  However if $d \equiv 3 \mod 4$, we have $\ints(\sqrt{-d}) = \{a + b\frac{1 + \sqrt{-d}}{2}\ \mid\  a, b \in \ints\}$. A more careful analysis will show that in this case, $N(\gamma - q) \leq \frac{(1 + d)^2}{16d}$, which is less than 1 for $d \leq 14$ and hence proves unique factorization for $d = 3, 7, 11$.
+
+\begin{lemma}
+For $d = 3, 7, 11$, given any $a, b \in \ints(\sqrt{-d})$, $b \neq 0$, there exists $q, r \in \ints(\sqrt{-d}))$ such that $a = bq + r$, and $N(r) < N(b)$.
+\end{lemma}
+\begin{proof}
+As above, consider $\gamma = \frac{a}{b}$, once again, since $\gamma \in \qf(\sqrt{-d})$, we have $\gamma = x + y\sqrt{-d}$, where $x, y \in \qf$. Let us plot the elements of $\ints(\sqrt{-d})$ --- these form a lattice in the plane as shown in \cref{fig:lattice}.  Each point in $\qf(\sqrt{-d})$ lies in one of the lattice cells. We can now compute the points in a cell that are maximally far from the vertices.  Consider the cell with vertices $(0,0), (1,0), (0,1), (1,-1)$.  By symmetry and using basic calculus, we can see that the point farthest from all will lie on the vertical line connecting $(0,1), (1, -1)$ and will be equidistant from $(0,0), (0,1)$ which correspond to the integers $0, \frac{1}{2} + \frac{\sqrt{-d}}{2}$.  Let the point be $\frac{1}{2} + x\sqrt{-d}$.  Then equating the norms to the two integers, we have $\frac{1}{4} + dx^2 = d(x - \frac{1}{2})^2$. Solving this we get $x = \frac{d-1}{4d}$, and its distance from the lattice points is $\frac{(1 + d)^2}{16d}$.
+
+Thus there is an element $q \in \ints(\sqrt{-d})$, such that $N(\gamma - q) \leq \frac{(1 + d)^2}{16d} < 1$ for $d \leq 14$. Then by repeating the above argument, we get $N(a - bq) < N(b)$, and setting $r = a-bq$ we have the result.
+
+\end{proof}
+
+\begin{figure}[htbp]\label{fig:lattice}
+\ifx\JPicScale\undefined\def\JPicScale{0.7}\fi
+\unitlength \JPicScale mm
+\begin{picture}(150,150)(0,-30)
+\linethickness{0.3mm}
+\put(0,30){\vector(1,0){155}}
+\put(10,-30){\vector(0,1){160}}
+\linethickness{0.1mm}
+\put(10,30){\circle*{2}}
+\put(10,30){\makebox(0,0)[tl]{$(0,0)$}}
+\put(30,30){\circle*{2}}
+\put(30,30){\makebox(0,0)[tl]{$(1,0)$}}
+\put(50,30){\circle*{2}}
+\put(50,30){\makebox(0,0)[tl]{$(2,0)$}}
+\put(70,30){\circle*{2}}
+\put(70,30){\makebox(0,0)[tl]{$(3,0)$}}
+\put(90,30){\circle*{2}}
+\put(90,30){\makebox(0,0)[tl]{$(4,0)$}}
+\put(110,30){\circle*{2}}
+\put(110,30){\makebox(0,0)[tl]{$(5,0)$}}
+\put(130,30){\circle*{2}}
+\put(130,30){\makebox(0,0)[tl]{$(6,0)$}}
+\put(20,70){\circle*{2}}
+\put(20,70){\makebox(0,0)[tl]{$(0,1)$}}
+\put(40,70){\circle*{2}}
+\put(40,70){\makebox(0,0)[tl]{$(1,1)$}}
+\put(60,70){\circle*{2}}
+\put(60,70){\makebox(0,0)[tl]{$(2,1)$}}
+\put(80,70){\circle*{2}}
+\put(80,70){\makebox(0,0)[tl]{$(3,1)$}}
+\put(100,70){\circle*{2}}
+\put(100,70){\makebox(0,0)[tl]{$(4,1)$}}
+\put(120,70){\circle*{2}}
+\put(120,70){\makebox(0,0)[tl]{$(5,1)$}}
+\put(140,70){\circle*{2}}
+\put(140,70){\makebox(0,0)[tl]{$(6,1)$}}
+\put(20,-10){\circle*{2}}
+\put(20,-10){\makebox(0,0)[tl]{$(1,-1)$}}
+\put(40,-10){\circle*{2}}
+\put(40,-10){\makebox(0,0)[tl]{$(2,-1)$}}
+\put(60,-10){\circle*{2}}
+\put(60,-10){\makebox(0,0)[tl]{$(3,-1)$}}
+\put(80,-10){\circle*{2}}
+\put(80,-10){\makebox(0,0)[tl]{$(4,-1)$}}
+\put(100,-10){\circle*{2}}
+\put(100,-10){\makebox(0,0)[tl]{$(5,-1)$}}
+\put(120,-10){\circle*{2}}
+\put(120,-10){\makebox(0,0)[tl]{$(6,-1)$}}
+\put(140,-10){\circle*{2}}
+\put(140,-10){\makebox(0,0)[tl]{$(7,-1)$}}
+\put(10,110){\circle*{2}}
+\put(10,110){\makebox(0,0)[tl]{$(-1,2)$}}
+\put(30,110){\circle*{2}}
+\put(30,110){\makebox(0,0)[tl]{$(0,2)$}}
+\put(50,110){\circle*{2}}
+\put(50,110){\makebox(0,0)[tl]{$(1,2)$}}
+\put(70,110){\circle*{2}}
+\put(70,110){\makebox(0,0)[tl]{$(2,2)$}}
+\put(90,110){\circle*{2}}
+\put(90,110){\makebox(0,0)[tl]{$(3,2)$}}
+\put(110,110){\circle*{2}}
+\put(110,110){\makebox(0,0)[tl]{$(4,2)$}}
+\put(130,110){\circle*{2}}
+\put(130,110){\makebox(0,0)[tl]{$(5,2)$}}
+\put(5,90){\line(1,4){10}}
+\put(5,10){\line(1,4){30}}
+\put(15,-30){\line(1,4){40}}
+\put(35,-30){\line(1,4){40}}
+\put(55,-30){\line(1,4){40}}
+\put(75,-30){\line(1,4){40}}
+\put(95,-30){\line(1,4){40}}
+\put(115,-30){\line(1,4){40}}
+\put(135,-30){\line(1,4){20}}
+\put(5,90){\line(1,4){10}}
+\put(25,-30){\line(-1,4){20}}
+\put(45,-30){\line(-1,4){40}}
+\put(65,-30){\line(-1,4){40}}
+\put(85,-30){\line(-1,4){40}}
+\put(105,-30){\line(-1,4){40}}
+\put(125,-30){\line(-1,4){40}}
+\put(145,-30){\line(-1,4){40}}
+\put(155,10){\line(-1,4){30}}
+\end{picture}
+\hspace{1cm}
+\begin{picture}(40,150)(0,-50)
+\put(0,30){\vector(1,0){50}}
+\put(10,-10){\vector(0,1){80}}
+\put(10,30){\circle*{2}}
+\put(10,30){\makebox(0,0)[tl]{$(0,0)$}}
+\put(30,30){\circle*{2}}
+\put(30,30){\makebox(0,0)[tl]{$(1,0)$}}
+\put(20,70){\circle*{2}}
+\put(20,70){\makebox(0,0)[tl]{$(0,1)$}}
+\put(20,-10){\circle*{2}}
+\put(20,-10){\makebox(0,0)[tl]{$(1,-1)$}}
+\put(20, -10){\line(0,1){80}}
+\put(10,30){\line(1,4){10}}
+\put(15,50){\line(4,-1){10}}
+\put(20,48.75){\circle*{1}}
+\put(21,48.75){\makebox(0,0)[bl]{$x + y\sqrt{-d}$}}
+\end{picture}
+\caption{Left: Lattice of integers in $\ints(\sqrt{-d})$. Each point $(a, b)$ represents the integer $a + b\frac{1 + \sqrt{-d}}{2}$. Right: one lattice cell, with the point farthest from the lattice points.}
+\end{figure}
+
+\section{Failure of Unique Factorization for $\ints(\sqrt{-5})$, $\ints(\sqrt{-6})$, $\ints(\sqrt{-10})$}
+
+The proof for $d = 1, 2$ did not work for any greater $d$, since it required $d+1 < 4$. The proof for $d = 3, 7, 11$ worked only for these numbers because it required $d \equiv 3 \mod 4$ and $(d + 1)^2 < 16d$. Thus we do not have a proof for $d = 5, 6, 10, 13, 14$ or any number larger than 14.  Note that we do not consider $d$ which have a square factor, as these are equivalent to smaller $d$. We now show that unique factorization fails for $d = 5, 6, 10, 13, 14$. The key fact we need is that $N(z)$ is multiplicative: $N(ab) = N(a)N(b)$. 
+\begin{itemize}
+\item[$d = 5$]: Observe that $6 = 2 \cdot 3 = (1 + \sqrt{-5})(1 - \sqrt{-5})$.  $N(2) = 4$, thus the only integers in $\ints(\sqrt{-5})$ that can divide $2$ and are not units or associates must have norm 2. However since $N(a + b\sqrt{-5}) = a^2 + 5b^2$, and $a, b \in \ints$, we see that $b$ must be 0, and hence there is no such $a$. Thus $2$ is prime in $\ints(\sqrt{-5})$.  Similarly we can verify that $3$ is prime as there are no elements in $\ints(\sqrt{-5})$ with norm 3, and so are $1 + \sqrt{-5}$ and $1 - \sqrt{-5}$, whose norms are 6.  Thus $6$ has two distinct factorizations in $\ints(\sqrt{-5})$.
+\item[$d = 6$]: $10 = 2\cdot 5 = (2 + \sqrt{-6})(2 - \sqrt{-6})$.  Once again $\ints(\sqrt{-6})$ has no elements with norm 2 or 5, thus $2, 5, 2 + \sqrt{-6}, 2 - \sqrt{-6}$ are all prime in $\ints(\sqrt{-6})$.
+\item[$d = 10$]: We use $14 = 2\cdot 7 = (2 + \sqrt{-10})(2 - \sqrt{-10})$. Since $\ints(\sqrt{-10})$ has no elements with norm 2 or 7, the factors are all primes.
+\item[$d = 13$]: Observe that $14 = 2\cdot 7 = (1 + \sqrt{-13})(1 - \sqrt{-13})$. The conclusion follows as above.
+\item[$d = 14$]: Observe that $15 = 3\cdot 5 = (1 + \sqrt{-14})(1 - \sqrt{-14})$. The conclusion follows as above.
+\end{itemize}
+Unique factorization can be restored for these domains by considering ideals in the domains, we shall not consider those here.
+
+For $d < 0$, there are infinitely many values for which unique factorization holds in $\ints(\sqrt{-d})$. However  for $d > 0$, the only values for which unique factorization holds in $\ints(\sqrt{-d})$ are $d = 1, 2, 3, 7, 11$ (proved above) and $d = 19, 43, 67, 163$. We now turn to these remaining values.
+\end{document}
