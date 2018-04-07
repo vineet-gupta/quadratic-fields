@@ -22,7 +22,7 @@
 A {\em quadratic field} is defined as $\qf(\sqrt{-d}) = \{a + b\sqrt{-d}\ \mid\ a, b \in \qf\}$ where $d \in \ints$. It can be verified to be a field over $\qf$ with the usual operations of $+, \times$, with respective identities $0, 1$ and inverses $- a - b\sqrt{-d}$ and $\frac{a}{a^2 + b^2 d} - \frac{b}{a^2 + b^2 d}\sqrt{-d}$.
 
 An {\em integer} in a field is defined to be any element of the field which is the root of a {\em monic} polynomial with coefficients in $\ints$.  
-The set of integers in a quadratic field form a ring.  We will denote the ring of integers in $\qf(\sqrt{-d})$ by $\ints(\sqrt{-d})$. 
+The set of integers in a quadratic field form a ring called its {\em ring of integers}.  We will denote the ring of integers in $\qf(\sqrt{-d})$ by $\ints(\sqrt{-d})$. 
 \begin{lemma}
 \begin{enumerate}
 \item If $d = 0$, i.e. $\qf(\sqrt{-d}) = \qf$, then $\ints(\sqrt{-d}) = \ints$.
@@ -51,10 +51,15 @@ Conversely these are the only integers because if $x$ is a root of a monic polyn
 \end{itemize}
 \end{proof}
 
-For any elements $a, b$ in a ring $R$, define $a | b$ if there exists $c \in R$ such that $ac = b$. 
-A {\em unit} $u \in R$ is any element such that $u | 1$. For example in the ring $\ints$, the only units are $\pm 1$, whereas in the ring $\ints(i)$ the units are $\pm 1, \pm i$.  Note that the set of units in a ring form a subgroup of the ring. Two elements $a, b \in R$ are said to be associates if $a = ub$ where $u$ is a unit in $R$. A {\em prime} $p \in R$ is any element which is not a unit such that $a | p$ iff $a$ is a unit or an associate of $p$.
+\paragraph{Some definitions for rings.} Let $R$ be any ring.
+\begin{itemize}
+\item {\bf Divisibility:} For any elements $a, b \in R$, define $a | b$ if there exists $c \in R$ such that $ac = b$. 
+\item {\bf Unit:} A {\em unit} $u \in R$ is any element such that $u | 1$. For example in the ring $\ints$, the only units are $\pm 1$, whereas in the ring $\ints(i)$ the units are $\pm 1, \pm i$.  Note that the set of units in a ring form a subgroup of the ring. 
+\item {\bf Associate:} Two elements $a, b \in R$ are said to be {\em associates} if $a = ub$ where $u$ is a unit in $R$. 
+\item {\bf Prime:} A {\em prime} $p \in R$ is any element which is not a unit such that $a | p$ iff $a$ is a unit or an associate of $p$.
+\end{itemize}
 
-A ring $R$ is a unique factorization domain if every integer can be written as a product of primes in a unique way, up to reorderings, units and associates.
+A ring $R$ is a {\em unique factorization domain} if every non-unit non-zero element in $R$ can be written as a product of primes in a unique way, up to reorderings, units and associates.
 
 \section{Case $d = 0$ --- Unique Factorization in $\ints$}
 
@@ -90,7 +95,13 @@ Every element of $\ints$ is either prime, or the product of two numbers which ar
 \end{proof}
 
 \section{Case $d = 1, 2$ --- Unique Factorization in $\ints(i), \ints(\sqrt{-2})$}
-We only need to establish the analog of \cref{lem:div-ints} for $\ints(i)$ and $\ints(\sqrt{-2})$ - the rest of the proof follows the case $d = 0$. Define the norm on $\qf(\sqrt{-d})$ as a function $N: \qf(\sqrt{-d}) \to \qf$ defined by $N(a + b\sqrt{-d}) = a^2 + db^2$. This has the following properties:
+We only need to establish the analog of \cref{lem:div-ints} for $\ints(i)$ and $\ints(\sqrt{-2})$ - the rest of the proof follows the case $d = 0$. 
+
+For any ring $R$, a {\em norm} is a function $N: R \to \ints^+ \cup \{ 0\}$ such that $N(0) = 0$. The analog of \cref{lem:div-ints} for an arbitrary ring $R$ with a norm $N$ is then:
+For any $a, b\in R$, $b \neq 0$, there exist $q, r \in R$ such that $a = bq + r$ and either $r = 0$ or $N(r) < N(b)$. Such a ring is called a {\em normed Euclidean domain}.
+
+We can define a norm on a field $F$ as a function $N: F \to \qf^+ \cup \{ 0\}$, and then the ring of integers in the field inherits it (of course we will need to ensure that $N(z)$ is an integer if $z$ is an integer in $F$).
+Define the norm on $\ints(\sqrt{-d})$ as a function $N: \qf(\sqrt{-d}) \to \qf$ defined by $N(a + b\sqrt{-d}) = a^2 + db^2$. This has the following properties:
 \begin{itemize}
 \item $N(z) \geq 0$ and $N(z) = 0 \leftrightarrow z = 0$.
 \item $N(z) = 1$ iff $z$ is a unit.
@@ -229,15 +240,35 @@ Thus there is an element $q \in \ints(\sqrt{-d})$, such that $N(\gamma - q) \leq
 
 \section{Failure of Unique Factorization for $\ints(\sqrt{-5})$, $\ints(\sqrt{-6})$, $\ints(\sqrt{-10})$}
 
-The proof for $d = 1, 2$ did not work for any greater $d$, since it required $d+1 < 4$. The proof for $d = 3, 7, 11$ worked only for these numbers because it required $d \equiv 3 \mod 4$ and $(d + 1)^2 < 16d$. Thus we do not have a proof for $d = 5, 6, 10, 13, 14$ or any number larger than 14.  Note that we do not consider $d$ which have a square factor, as these are equivalent to smaller $d$. We now show that unique factorization fails for $d = 5, 6, 10, 13, 14$. The key fact we need is that $N(z)$ is multiplicative: $N(ab) = N(a)N(b)$. 
+The proof for $d = 1, 2$ did not work for any greater $d$, since it required $d+1 < 4$. The proof for $d = 3, 7, 11$ worked only for these numbers because it required $d \equiv 3 \mod 4$ and $(d + 1)^2 < 16d$. Thus we do not have a proof for $d = 5, 6, 10, 13, 14$ or any number larger than 14.  Note that we do not consider $d$ which have a square factor, as these are equivalent to smaller $d$. We now show that unique factorization fails for $d = 5, 6, 10, 13, 14, 15$. The key fact we need is that $N(z)$ is multiplicative: $N(ab) = N(a)N(b)$. 
 \begin{itemize}
 \item[$d = 5$]: Observe that $6 = 2 \cdot 3 = (1 + \sqrt{-5})(1 - \sqrt{-5})$.  $N(2) = 4$, thus the only integers in $\ints(\sqrt{-5})$ that can divide $2$ and are not units or associates must have norm 2. However since $N(a + b\sqrt{-5}) = a^2 + 5b^2$, and $a, b \in \ints$, we see that $b$ must be 0, and hence there is no such $a$. Thus $2$ is prime in $\ints(\sqrt{-5})$.  Similarly we can verify that $3$ is prime as there are no elements in $\ints(\sqrt{-5})$ with norm 3, and so are $1 + \sqrt{-5}$ and $1 - \sqrt{-5}$, whose norms are 6.  Thus $6$ has two distinct factorizations in $\ints(\sqrt{-5})$.
 \item[$d = 6$]: $10 = 2\cdot 5 = (2 + \sqrt{-6})(2 - \sqrt{-6})$.  Once again $\ints(\sqrt{-6})$ has no elements with norm 2 or 5, thus $2, 5, 2 + \sqrt{-6}, 2 - \sqrt{-6}$ are all prime in $\ints(\sqrt{-6})$.
-\item[$d = 10$]: We use $14 = 2\cdot 7 = (2 + \sqrt{-10})(2 - \sqrt{-10})$. Since $\ints(\sqrt{-10})$ has no elements with norm 2 or 7, the factors are all primes.
-\item[$d = 13$]: Observe that $14 = 2\cdot 7 = (1 + \sqrt{-13})(1 - \sqrt{-13})$. The conclusion follows as above.
-\item[$d = 14$]: Observe that $15 = 3\cdot 5 = (1 + \sqrt{-14})(1 - \sqrt{-14})$. The conclusion follows as above.
+\item[$d = 10$]: We use $14 = 2\cdot 7 = (2 + \sqrt{-10})(2 - \sqrt{-10})$. Since $\ints(\sqrt{-10})$ has no elements with norm 2 or 7, the factors are all primes. A similar argument works for $d = 13, 14, 17$.
+\item[$d = 15$]: Observe that $4 = 2\cdot 2 = (\frac{1 + \sqrt{-15}}{2})(\frac{1 - \sqrt{-15}}{2})$. The conclusion follows as above. Similar arguments show $d = 23, 31, 35, 39, 47$ also do not result in unique factorization domains.
 \end{itemize}
 Unique factorization can be restored for these domains by considering ideals in the domains, we shall not consider those here.
 
 For $d < 0$, there are infinitely many values for which unique factorization holds in $\ints(\sqrt{-d})$. However  for $d > 0$, the only values for which unique factorization holds in $\ints(\sqrt{-d})$ are $d = 1, 2, 3, 7, 11$ (proved above) and $d = 19, 43, 67, 163$. We now turn to these remaining values.
+
+\section{$\ints(\sqrt{-d})$ is not a normed Euclidean domain for $d > 11$}
+
+We showed above that $\ints(\sqrt{-d})$ is a unique factorization domain for various $d$ above by defining a norm, and showing that analogs of \cref{lem:div-ints} held for this norm.  However our proofs were limited to $d \leq 11$.  We now show that in fact analogs of \cref{lem:div-ints} do not hold for $\ints(\sqrt{-d}), d > 11$ for any possible norm function --- $\ints(\sqrt{-d}), d > 11$ is not a normed Euclidean domain.  Hence this proof method cannot work.
+
+Let $\theta = \frac{1}{2}(1 + \sqrt{-d})$ if $d \equiv 3 \mod 4$, and $\theta = \sqrt{-d}$ otherwise.
+\begin{itemize}
+\item The only units in $\ints(\sqrt{-d})$ are 1 and -1. Proof: If $(a + b\theta)$ is a unit, then $N(a + b\theta) = 1$ for the standard norm.  However for $d > 3$, this is possible only if $a = \pm 1, b = 0$.
+\item The elements 2 and 3 are irreducible in $\ints(\sqrt{-d})$. Again, if $(a + b\theta) | 2$, then $N(a + b\theta) | N(2) = 4$. Thus $N(a + b\theta) = 2$, since the only elements with $N(a + b\theta) = 1$ are units. However for $d > 7$, there are no elements in $\ints(\sqrt{-d})$ with norm 2.  Similarly if $(a + b\theta) | 3$, we must have $N(a + b\theta) = 3$, and this is not possible for $d > 11$.
+\end{itemize}
+Now let $D: \ints(\sqrt{-d}) \to \ints^+ \cup \{0\}$ be any norm function such that $D(0) = 0$.  Let $m \in  \ints(\sqrt{-d})$ be such that $m$ is not 0 or a unit, and $D(m)$ is as small as possible. Now we divide 2 and $\theta$ by $m$.
+\begin{itemize}
+\item Divide 2 by $m$: $2 = mq + r$, such that $D(r) < D(m)$ or $r = 0$.  Since $D(m)$ is as small as possible, $r = 0, -1, 1$. If $r = 0$ then $m | 2$, so $m = \pm 2$, since 2 is irreducible and $m$ is not a unit. If $r = -1$, then $m = \pm 3$ as 3 is also irreducible. If $r = 1$, then $m | 1$, which is not possible as $m$ is not a unit.
+\item Divide $\theta$ by $m$: $\theta = mq' + r'$ with $D(r) < D(m)$ or $r = 0$. Again $r' = 0, 1, -1$. Thus $m$ divides one of $\theta, \theta -1, \theta + 1$. Since $m = \pm 2, \pm 3$ from above, none of these is possible. Thus $\ints(\sqrt{-d}), d > 11$ is not a Euclidean domain for any norm $D$.
+\end{itemize}
+
+The above argument does not apply to $d = 3, 7, 11$ because for $d = 3$, $\theta$ is a unit, whereas in $\theta | 2$ in $\ints(\sqrt{-7})$ and $theta | 3$ in $\ints(\sqrt{-11})$. Thus the premises of the argument do not hold.
+
+Thus our previous proof strategy does not work for $d > 11$. However, there is a possible alternative --- if we could establish an analog of \cref{lem:euclid-ints}, then we would still get unique factorization. This can be done using the Hasse-Dedekind norm.
+
+
 \end{document}
